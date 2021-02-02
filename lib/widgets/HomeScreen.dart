@@ -43,9 +43,9 @@ class _HomeScreenState extends State<HomeScreen> {
           appBar: AppBar(
             actions: [
               MaterialButton(
-                  color: Colors.purple,
+                  color: Colors.blue,
                   onPressed: () {
-                    themePersistantValueWriter("purple");
+                    themePersistantValueWriter("blue");
                   }),
               MaterialButton(
                   color: Colors.green,
