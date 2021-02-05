@@ -1,6 +1,7 @@
 import 'package:anthem_music_player/functions/AudioPlayer.dart';
 import 'package:anthem_music_player/functions/ThemeChanger.dart';
 import 'package:anthem_music_player/widgets/SongList.dart';
+import 'package:anthem_music_player/widgets/loadingPage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -52,9 +53,8 @@ class _HomeScreenState extends State<HomeScreen> {
               child: StreamBuilder(
                 stream: audioPlayer.audioAssetplayer.isPlaying,
                 builder: (context, snapshot) {
-                  print("  VALUE IS : $snapshot");
-                  if (snapshot.connectionState == ConnectionState.done) {
-                    return CircularProgressIndicator();
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return loadingAnimatedScreen(context);
                   } else if (snapshot.connectionState ==
                       ConnectionState.active) {
                     return FittedBox(
@@ -64,7 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ? Icon(Icons.pause)
                             : Icon(Icons.play_arrow));
                   } else {
-                    return CircularProgressIndicator();
+                    return loadingAnimatedScreen(context);
                   }
                 },
               )),

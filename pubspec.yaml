@@ -35,6 +35,7 @@ dependencies:
   flutter_audio_query: ^0.3.5+6
   audio_service: ^0.16.2
   assets_audio_player: ^2.0.13+1
+  lottie: ^0.7.0+1
 
   
 dev_dependencies:
@@ -53,8 +54,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+  - assets/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
