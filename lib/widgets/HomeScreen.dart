@@ -45,17 +45,27 @@ class _HomeScreenState extends State<HomeScreen> {
         builder: (context, themeChanger, audioPlayer, child) {
       return Scaffold(
           floatingActionButton: FloatingActionButton(
-              onPressed: () {},
+              onPressed: () {
+                AudioPlayer().audioAssetplayer.playOrPause();
+              },
               backgroundColor: themeChanger.buttonColor,
               child: StreamBuilder(
                 stream: audioPlayer.audioAssetplayer.isPlaying,
-                builder: (context, AsyncSnapshot<bool> snapshot) {
-                  return FittedBox(
-                      alignment: Alignment.center,
-                      fit: BoxFit.fill,
-                      child: snapshot.data
-                          ? Icon(Icons.pause)
-                          : Icon(Icons.play_arrow));
+                builder: (context, snapshot) {
+                  print("  VALUE IS : $snapshot");
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    return CircularProgressIndicator();
+                  } else if (snapshot.connectionState ==
+                      ConnectionState.active) {
+                    return FittedBox(
+                        alignment: Alignment.center,
+                        fit: BoxFit.fill,
+                        child: snapshot.data
+                            ? Icon(Icons.pause)
+                            : Icon(Icons.play_arrow));
+                  } else {
+                    return CircularProgressIndicator();
+                  }
                 },
               )),
           appBar: AppBar(

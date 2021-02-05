@@ -8,7 +8,7 @@ class AudioPlayer extends ChangeNotifier {
   var currentSongIndex;
   var currentDuration;
   var lastSongPlayed;
-  var isPlaying = false;
+  var isPlaying;
   final audioAssetplayer = new AssetsAudioPlayer.withId('0');
   final playListing = AssetsAudioPlayer().playlist;
 
@@ -36,12 +36,7 @@ class AudioPlayer extends ChangeNotifier {
     //_subscriptions.add(_assetsAudioPlayer.playerState.listen((playerState) {
     //  print("playerState : $playerState");
     //}));
-    _sub.add(audioAssetplayer.isPlaying.listen((isplaying) {
-      this.isPlaying = isplaying;
-    }));
-    _sub.add(AssetsAudioPlayer.addNotificationOpenAction((notification) {
-      return false;
-    }));
+    this.isPlaying = audioAssetplayer.isPlaying.value;
     notifyListeners();
   }
 
