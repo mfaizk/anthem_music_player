@@ -1,4 +1,6 @@
+import 'package:anthem_music_player/functions/AudioPlayer.dart';
 import 'package:anthem_music_player/functions/ThemeChanger.dart';
+import 'package:anthem_music_player/widgets/SongList.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -33,13 +35,29 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     themeProvider();
+    AudioPlayer().loadSongs();
+    AudioPlayer().audioPlayerListner();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<ThemeChanger>(
-      builder: (context, value, child) {
-        return Scaffold(
+    return Consumer2<ThemeChanger, AudioPlayer>(
+        builder: (context, themeChanger, audioPlayer, child) {
+      return Scaffold(
+          floatingActionButton: FloatingActionButton(
+              onPressed: () {},
+              backgroundColor: themeChanger.buttonColor,
+              child: StreamBuilder(
+                stream: audioPlayer.audioAssetplayer.isPlaying,
+                builder: (context, AsyncSnapshot<bool> snapshot) {
+                  return FittedBox(
+                      alignment: Alignment.center,
+                      fit: BoxFit.fill,
+                      child: snapshot.data
+                          ? Icon(Icons.pause)
+                          : Icon(Icons.play_arrow));
+                },
+              )),
           appBar: AppBar(
             actions: [
               MaterialButton(
@@ -48,18 +66,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     themePersistantValueWriter("blue");
                   }),
               MaterialButton(
-                  color: Colors.green,
+                  color: Colors.purple,
                   onPressed: () {
-                    themePersistantValueWriter("green");
+                    themePersistantValueWriter("purple");
                   })
             ],
-            backgroundColor: value.primaryColor,
+            backgroundColor: themeChanger.primaryColor,
           ),
-          body: Container(
-            color: value.bodyColor,
-          ),
-        );
-      },
-    );
+          body: songlistWidget(context));
+    });
   }
 }

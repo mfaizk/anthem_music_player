@@ -1,23 +1,24 @@
 import 'package:flutter/material.dart';
 
 class ThemeChanger extends ChangeNotifier {
-  Color primaryColor = Color(0xff3DBE29);
-  Color bodyColor = Color(0xff22CB5C);
-  Color buttonColor = Color(0xff242B2E);
-
+  Color primaryColor = Color(0xff2827CC);
+  Color bodyColor = Color(0xff3944F7);
+  Color buttonColor = Color(0xff2827CC);
+  Color listColor = Color(0xff120E43);
+  Color textColor = Color(0xffCAD5E2);
   set changeTheme(String colorsString) {
     if (colorsString == "blue") {
       this.primaryColor = Color(0xff2827CC);
       this.bodyColor = Color(0xff3944F7);
-      this.buttonColor = Color(0xff03203C);
-    } else if (colorsString == "green") {
-      this.primaryColor = Color(0xff3DBE29);
-      this.bodyColor = Color(0xff22CB5C);
-      this.buttonColor = Color(0xff242B2E);
+      this.buttonColor = Color(0xff2827CC);
+      this.listColor = Color(0xff383CC1);
+      this.textColor = Color(0xffCAD5E2);
     } else if (colorsString == "purple") {
       this.primaryColor = Color(0xff5A20CB);
       this.bodyColor = Color(0xff8D3DAF);
-      this.buttonColor = Color(0xffffffff);
+      this.buttonColor = Color(0xff5A20CB);
+      this.listColor = Color(0xff5A20CB);
+      this.textColor = Color(0xffCAD5E2);
     }
     notifyListeners();
   }
