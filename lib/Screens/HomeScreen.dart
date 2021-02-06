@@ -77,7 +77,13 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: GestureDetector(
                             onTap: () {},
                             child: DropdownButton<String>(
-                              value: dropdownValue,
+                              // value: dropdownValue,
+
+                              // onTap: () {
+                              //   if (dropdownValue.toString() == 'One') {
+                              //     print('one');
+                              //   }
+                              // },
                               icon: Icon(
                                 EvaIcons.moreVertical,
                                 color: themeChanger.textColor,
@@ -87,9 +93,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                 color: Colors.deepPurpleAccent,
                               ),
                               onChanged: (String newValue) {
-                                setState(() {
-                                  dropdownValue = newValue;
-                                });
+                                // setState(() {
+                                //   dropdownValue = newValue;
+                                // });
+                                // onTap: () {
+                                if (newValue.toString() == 'One') {
+                                  print('one');
+                                }
                               },
                               items: <String>[
                                 'One',
