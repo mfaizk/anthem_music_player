@@ -9,7 +9,7 @@ Widget playerButtonSet(double height, CurvedAnimation _myAnimation,
   return Consumer2<ThemeChanger, AudioPlayer>(
     builder: (context, themeChanger, audioPlayer, child) {
       return Container(
-        color: themeChanger.bgColor,
+        color: themeChanger.primaryColor,
         width: MediaQuery.of(context).size.width,
         height: height,
         child: StreamBuilder(
@@ -30,7 +30,7 @@ Widget playerButtonSet(double height, CurvedAnimation _myAnimation,
                   child: GestureDetector(
                     child: Icon(
                       EvaIcons.skipBack,
-                      color: themeChanger.buttonColor,
+                      color: themeChanger.textColor,
                       size: MediaQuery.of(context).size.width * 0.14,
                     ),
                     onTap: () => audioPlayer.audioAssetplayer.previous(),
@@ -45,7 +45,7 @@ Widget playerButtonSet(double height, CurvedAnimation _myAnimation,
                         icon: AnimatedIcons.pause_play,
                         progress: _myAnimation,
                         size: MediaQuery.of(context).size.width * 0.2,
-                        color: themeChanger.buttonColor,
+                        color: themeChanger.textColor,
                       ),
                       onTap: () {
                         if (snapshot.data == true) {
@@ -65,7 +65,7 @@ Widget playerButtonSet(double height, CurvedAnimation _myAnimation,
                   child: GestureDetector(
                     child: Icon(
                       EvaIcons.skipForward,
-                      color: themeChanger.buttonColor,
+                      color: themeChanger.textColor,
                       size: MediaQuery.of(context).size.width * 0.14,
                     ),
                     onTap: () => audioPlayer.audioAssetplayer.next(),

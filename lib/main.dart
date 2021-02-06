@@ -1,6 +1,7 @@
 import 'package:anthem_music_player/Screens/HomeScreen.dart';
 import 'package:anthem_music_player/functions/AudioPlayer.dart';
 import 'package:anthem_music_player/functions/ThemeChanger.dart';
+import 'package:anthem_music_player/functions/permissionHandler.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -17,7 +18,10 @@ void main() {
       ),
       ChangeNotifierProvider(
         create: (context) => AudioPlayer(),
-      )
+      ),
+      ChangeNotifierProvider(
+        create: (context) => PermissionServiceHandler(),
+      ),
     ],
     child: MyApp(),
   ));

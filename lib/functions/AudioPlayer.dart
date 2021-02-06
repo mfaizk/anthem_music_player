@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_audio_query/flutter_audio_query.dart';
@@ -11,34 +9,6 @@ class AudioPlayer extends ChangeNotifier {
   var isPlaying;
   final audioAssetplayer = new AssetsAudioPlayer.withId('0');
   final playListing = AssetsAudioPlayer().playlist;
-
-  audioPlayerListner() {
-    final List<StreamSubscription> _sub = [];
-
-    //_subscriptions.add(_assetsAudioPlayer.playlistFinished.listen((data) {
-    //  print("finished : $data");
-    //}));
-    _sub.add(audioAssetplayer.playlistAudioFinished.listen((data) {
-      print("playlistAudioFinished : $data");
-    }));
-    _sub.add(audioAssetplayer.audioSessionId.listen((sessionId) {
-      print("audioSessionId : $sessionId");
-    }));
-    //_subscriptions.add(_assetsAudioPlayer.current.listen((data) {
-    //  print("current : $data");
-    //}));
-    //_subscriptions.add(_assetsAudioPlayer.onReadyToPlay.listen((audio) {
-    //  print("onReadyToPlay : $audio");
-    //}));
-    //_subscriptions.add(_assetsAudioPlayer.isBuffering.listen((isBuffering) {
-    //  print("isBuffering : $isBuffering");
-    //}));
-    //_subscriptions.add(_assetsAudioPlayer.playerState.listen((playerState) {
-    //  print("playerState : $playerState");
-    //}));
-    this.isPlaying = audioAssetplayer.isPlaying.value;
-    notifyListeners();
-  }
 
   loadSongs() async {
     FlutterAudioQuery query = new FlutterAudioQuery();
@@ -65,6 +35,7 @@ class AudioPlayer extends ChangeNotifier {
       await audioAssetplayer.open(
         Playlist(audios: audioList),
         autoStart: false,
+        playInBackground: PlayInBackground.enabled,
         showNotification: true,
         headPhoneStrategy: HeadPhoneStrategy.pauseOnUnplugPlayOnPlug,
         audioFocusStrategy:
@@ -73,6 +44,7 @@ class AudioPlayer extends ChangeNotifier {
     } on Exception catch (e) {
       print(e);
     }
+    notifyListeners();
   }
 
   set playSong(int id) {

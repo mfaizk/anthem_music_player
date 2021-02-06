@@ -1,3 +1,4 @@
+import 'package:anthem_music_player/Screens/widgets/currentSongWidget.dart';
 import 'package:anthem_music_player/Screens/widgets/playerButtonSet.dart';
 import 'package:anthem_music_player/Screens/widgets/playerNameWidget.dart';
 import 'package:anthem_music_player/Screens/widgets/playingWidget.dart';
@@ -69,6 +70,8 @@ class _PlayerScreenState extends State<PlayerScreen>
                   MediaQuery.of(context).size.width),
               playerButtonSet(MediaQuery.of(context).size.height * 0.1,
                   _myAnimation, _controller),
+              currentSongWidget(
+                  context, MediaQuery.of(context).size.height * 0.11)
             ],
           ),
         );

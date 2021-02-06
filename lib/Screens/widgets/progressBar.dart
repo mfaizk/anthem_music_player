@@ -9,6 +9,7 @@ Widget progressBar(BuildContext context, double height, double width) {
     builder: (context, audioPlayer, themeChanger, child) {
       return Material(
         child: Container(
+          color: themeChanger.primaryColor,
           height: height,
           width: width,
           child: Row(children: [
