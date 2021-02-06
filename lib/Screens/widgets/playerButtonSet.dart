@@ -15,6 +15,11 @@ Widget playerButtonSet(double height, CurvedAnimation _myAnimation,
         child: StreamBuilder(
           stream: audioPlayer.audioAssetplayer.isPlaying,
           builder: (context, AsyncSnapshot<bool> snapshot) {
+            if (snapshot.data == true) {
+              _controller.reverse();
+            } else {
+              _controller.forward();
+            }
             return Row(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,

@@ -4,7 +4,7 @@ import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-Widget progressBar(double height, double width) {
+Widget progressBar(BuildContext context, double height, double width) {
   return Consumer2<AudioPlayer, ThemeChanger>(
     builder: (context, audioPlayer, themeChanger, child) {
       return Material(
@@ -15,12 +15,15 @@ Widget progressBar(double height, double width) {
             Container(
               height: height,
               width: MediaQuery.of(context).size.width * 0.9,
-              child: StreamBuilder<Duration>(
+              //TODO: solve stream builder error
+              child: StreamBuilder(
                 stream: audioPlayer.audioAssetplayer.currentPosition,
-                builder: (context, AsyncSnapshot<Duration> snapshot1) {
-                  if (snapshot1.connectionState == ConnectionState.waiting) {
-                    return CircularProgressIndicator();
-                  } else if (snapshot1.connectionState ==
+                builder: (context, asyncSnapshot) {
+                  final Duration duration = asyncSnapshot.data;
+                  if (asyncSnapshot.connectionState ==
+                      ConnectionState.waiting) {
+                    return Container(child: CircularProgressIndicator());
+                  } else if (asyncSnapshot.connectionState ==
                       ConnectionState.active) {
                     return StreamBuilder(
                       stream: audioPlayer.audioAssetplayer.realtimePlayingInfos,
@@ -56,7 +59,9 @@ Widget progressBar(double height, double width) {
                                 max: realtimeInfo.data.duration.inSeconds
                                     .toDouble(),
                                 activeColor: themeChanger.bgColor,
-                                value: snapshot1.data.inSeconds.toDouble(),
+                                value: realtimeInfo
+                                    .data.currentPosition.inSeconds
+                                    .toDouble(),
                                 onChanged: (value) {
                                   audioPlayer.audioAssetplayer
                                       .seek(Duration(seconds: value.toInt()));
@@ -68,7 +73,7 @@ Widget progressBar(double height, double width) {
                       },
                     );
                   } else {
-                    return CircularProgressIndicator();
+                    return Container(child: CircularProgressIndicator());
                   }
                 },
               ),
@@ -81,7 +86,9 @@ Widget progressBar(double height, double width) {
                   stream: audioPlayer.audioAssetplayer.currentPosition,
                   builder: (context, asyncSnapshot) {
                     final Duration duration = asyncSnapshot.data;
-                    return Text(duration.inSeconds.toString());
+                    return duration.inSeconds != null
+                        ? Text(duration.inSeconds.toString())
+                        : Text(":_ _");
                   }),
             )
           ]),
@@ -90,3 +97,6 @@ Widget progressBar(double height, double width) {
     },
   );
 }
+//  Text(duration.inSeconds.toString())
+
+// snapshot1.data.inSeconds.toDouble(),

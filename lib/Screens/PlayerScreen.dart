@@ -65,7 +65,7 @@ class _PlayerScreenState extends State<PlayerScreen>
                 child: playingPlayer(MediaQuery.of(context).size.height * 0.6,
                     MediaQuery.of(context).size.width),
               ),
-              progressBar(MediaQuery.of(context).size.height * 0.1,
+              progressBar(context, MediaQuery.of(context).size.height * 0.1,
                   MediaQuery.of(context).size.width),
               playerButtonSet(MediaQuery.of(context).size.height * 0.1,
                   _myAnimation, _controller),
