@@ -1,10 +1,10 @@
+import 'package:anthem_music_player/Screens/widgets/SongList.dart';
 import 'package:anthem_music_player/functions/AudioPlayer.dart';
 import 'package:anthem_music_player/functions/ThemeChanger.dart';
-import 'package:anthem_music_player/widgets/SongList.dart';
-import 'package:anthem_music_player/widgets/loadingPage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../Screens/widgets/fab.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -45,29 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Consumer2<ThemeChanger, AudioPlayer>(
         builder: (context, themeChanger, audioPlayer, child) {
       return Scaffold(
-          floatingActionButton: FloatingActionButton(
-              onPressed: () {
-                AudioPlayer().audioAssetplayer.playOrPause();
-              },
-              backgroundColor: themeChanger.buttonColor,
-              child: StreamBuilder(
-                stream: audioPlayer.audioAssetplayer.isPlaying,
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return loadingAnimatedScreen(context);
-                  } else if (snapshot.connectionState ==
-                      ConnectionState.active) {
-                    return FittedBox(
-                        alignment: Alignment.center,
-                        fit: BoxFit.fill,
-                        child: snapshot.data
-                            ? Icon(Icons.pause)
-                            : Icon(Icons.play_arrow));
-                  } else {
-                    return loadingAnimatedScreen(context);
-                  }
-                },
-              )),
+          floatingActionButton: fab(),
           appBar: AppBar(
             actions: [
               MaterialButton(

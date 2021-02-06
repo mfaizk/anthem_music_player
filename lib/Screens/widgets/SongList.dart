@@ -1,6 +1,6 @@
+import 'package:anthem_music_player/Screens/widgets/loadingPage.dart';
 import 'package:anthem_music_player/functions/AudioPlayer.dart';
 import 'package:anthem_music_player/functions/ThemeChanger.dart';
-import 'package:anthem_music_player/widgets/loadingPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_audio_query/flutter_audio_query.dart';
 import 'package:provider/provider.dart';

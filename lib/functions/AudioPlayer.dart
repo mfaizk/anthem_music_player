@@ -54,6 +54,9 @@ class AudioPlayer extends ChangeNotifier {
                 element.artist.isEmpty ? "Artist Not Found" : element.artist,
             album:
                 element.album.isEmpty ? "Album Name Not Found" : element.album,
+            image: element.album.isEmpty
+                ? null
+                : MetasImage.file(element.albumArtwork),
           )));
     });
     // print(audioList[0].audioType);
