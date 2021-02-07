@@ -9,34 +9,24 @@ Widget currentSongWidget(BuildContext context, double height) {
   return Consumer2<ThemeChanger, AudioPlayer>(
     builder: (context, themeChanger, audioPlayer, child) {
       return Material(
-        color: themeChanger.primaryColor,
-        child: StreamBuilder(
-          stream: audioPlayer.audioAssetplayer.realtimePlayingInfos,
-          builder: (context, AsyncSnapshot<RealtimePlayingInfos> snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return CircularProgressIndicator();
-            } else if (snapshot.connectionState == ConnectionState.active) {
-              return Container(
-                alignment: Alignment.center,
-                width: MediaQuery.of(context).size.width,
-                height: height,
-                child: FittedBox(
-                  fit: BoxFit.scaleDown,
-                  alignment: Alignment.center,
-                  child: Text(
-                    "Playing: " + snapshot.data.current.audio.audio.metas.title,
-                    style: GoogleFonts.openSans(
-                        color: themeChanger.textColor,
-                        fontSize: MediaQuery.of(context).size.height * 0.025),
-                  ),
-                ),
+          color: themeChanger.primaryColor,
+          child: PlayerBuilder.realtimePlayingInfos(
+            player: audioPlayer.audioAssetplayer,
+            builder: (context, realtimePlayingInfos) {
+              var current = realtimePlayingInfos.current;
+              if (current != null) {
+                return Text(
+                  "Playing: " + current.audio.audio.metas.title,
+                  style: GoogleFonts.roboto(color: themeChanger.textColor),
+                );
+              }
+
+              return Text(
+                'Playing=null',
+                style: GoogleFonts.roboto(color: themeChanger.textColor),
               );
-            } else {
-              return CircularProgressIndicator();
-            }
-          },
-        ),
-      );
+            },
+          ));
     },
   );
 }
