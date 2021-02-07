@@ -8,16 +8,17 @@ class AudioPlayer extends ChangeNotifier {
   var lastSongPlayed;
   var isPlaying;
   final audioAssetplayer = new AssetsAudioPlayer.withId('0');
-  final playListing = AssetsAudioPlayer().playlist;
+  List<SongInfo> songInfo;
+  List<Audio> audioList = new List<Audio>();
 
-  loadSongs() async {
+  var isLoaded;
+
+  Future<bool> loadSongs() async {
     FlutterAudioQuery query = new FlutterAudioQuery();
-
-    List<SongInfo> songInfo = await query.getSongs();
-    List<Audio> audioList = new List<Audio>();
+    this.songInfo = await query.getSongs();
 
     songInfo.forEach((element) {
-      audioList.add(Audio.file(element.filePath,
+      this.audioList.add(Audio.file(element.filePath,
           metas: Metas(
             title: element.title.isEmpty ? "Title Not Found" : element.title,
             artist:
@@ -29,21 +30,26 @@ class AudioPlayer extends ChangeNotifier {
                 : MetasImage.file(element.albumArtwork),
           )));
     });
-    // print(audioList[0].audioType);
 
     try {
-      await audioAssetplayer.open(
-        Playlist(audios: audioList),
+      await audioAssetplayer
+          .open(
+        Playlist(audios: this.audioList),
         autoStart: false,
         playInBackground: PlayInBackground.enabled,
         showNotification: true,
         headPhoneStrategy: HeadPhoneStrategy.pauseOnUnplugPlayOnPlug,
         audioFocusStrategy:
             AudioFocusStrategy.request(resumeAfterInterruption: true),
-      );
+      )
+          .whenComplete(() {
+        this.isLoaded = true;
+      });
     } on Exception catch (e) {
-      print(e);
+      this.isLoaded = false;
     }
+    this.isLoaded = false;
+
     notifyListeners();
   }
 

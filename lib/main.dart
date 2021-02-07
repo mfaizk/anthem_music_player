@@ -1,4 +1,5 @@
 import 'package:anthem_music_player/Screens/HomeScreen.dart';
+import 'package:anthem_music_player/functions/AudioFetcher.dart';
 import 'package:anthem_music_player/functions/AudioPlayer.dart';
 import 'package:anthem_music_player/functions/ThemeChanger.dart';
 import 'package:anthem_music_player/functions/permissionHandler.dart';
@@ -21,6 +22,12 @@ void main() {
       ),
       ChangeNotifierProvider(
         create: (context) => PermissionServiceHandler(),
+      ),
+      FutureProvider(
+        create: (context) => AudioFetcher().fetch(),
+        catchError: (context, error) {
+          print(error.toString);
+        },
       ),
     ],
     child: MyApp(),
