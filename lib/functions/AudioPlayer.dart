@@ -48,6 +48,7 @@ class AudioPlayer extends ChangeNotifier {
     } on Exception catch (e) {
       this.isLoaded = false;
     }
+
     this.isLoaded = false;
 
     notifyListeners();

@@ -6,6 +6,7 @@ class PermissionServiceHandler extends ChangeNotifier {
   var isGranted;
   Future<bool> get permissionRequester async {
     var result = await Permission.storage.request();
+
     if (result == PermissionStatus.granted) {
       this.isGranted = true;
     } else {

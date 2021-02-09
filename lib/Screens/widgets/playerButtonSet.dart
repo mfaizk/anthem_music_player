@@ -49,7 +49,9 @@ Widget playerButtonSet(double height, CurvedAnimation _myAnimation,
                       ),
                       onTap: () {
                         if (snapshot.data == true) {
+                          // _audioPlayerTaskEntrypoint();
                           audioPlayer.audioAssetplayer.playOrPause();
+
                           _controller.forward();
                         } else if (snapshot.data == false) {
                           audioPlayer.audioAssetplayer.playOrPause();
@@ -79,3 +81,17 @@ Widget playerButtonSet(double height, CurvedAnimation _myAnimation,
     },
   );
 }
+
+// void _audioPlayerTaskEntrypoint() async {
+//   await AudioService.start(
+//     backgroundTaskEntrypoint: _audioPlayerTaskEntrypoint,
+//     androidNotificationChannelName: 'Anthem_Music_Player',
+//     androidNotificationColor: 0xFF2196f3,
+//     androidNotificationIcon: 'mipmap/ic_launcher',
+//     androidEnableQueue: true,
+//     androidResumeOnClick: true,
+//     androidShowNotificationBadge: true,
+//     androidNotificationOngoing: true,
+//   );
+//   await AudioServiceBackground.run(() => BackGroundPlay());
+// }
