@@ -36,6 +36,7 @@ class AudioPlayer extends ChangeNotifier {
           .open(
         Playlist(audios: this.audioList),
         autoStart: false,
+        loopMode: LoopMode.playlist,
         playInBackground: PlayInBackground.enabled,
         showNotification: true,
         headPhoneStrategy: HeadPhoneStrategy.pauseOnUnplugPlayOnPlug,

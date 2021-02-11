@@ -71,7 +71,7 @@ class _PlayerScreenState extends State<PlayerScreen>
               playerButtonSet(MediaQuery.of(context).size.height * 0.1,
                   _myAnimation, _controller),
               currentSongWidget(
-                  context, MediaQuery.of(context).size.height * 0.11)
+                  context, MediaQuery.of(context).size.height * 0.2)
             ],
           ),
         );

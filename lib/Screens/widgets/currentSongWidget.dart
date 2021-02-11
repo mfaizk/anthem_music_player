@@ -13,10 +13,11 @@ Widget currentSongWidget(BuildContext context, double height) {
           child: PlayerBuilder.realtimePlayingInfos(
             player: audioPlayer.audioAssetplayer,
             builder: (context, realtimePlayingInfos) {
-              var current = realtimePlayingInfos.current;
-              if (current != null) {
+              RealtimePlayingInfos rInfo = realtimePlayingInfos;
+              if (rInfo != null) {
                 return Text(
-                  "Playing: " + current.audio.audio.metas.title,
+                  "Playing: " +
+                      rInfo.current.audio.audio.metas.title.toString(),
                   style: GoogleFonts.roboto(color: themeChanger.textColor),
                 );
               }
